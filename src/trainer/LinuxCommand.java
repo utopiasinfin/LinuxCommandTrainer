@@ -1,12 +1,5 @@
 package trainer;
 
-// Enum para representar el nivel de dificultad
-enum Difficulty {
-    BEGINNER,    // Nivel básico
-    INTERMEDIATE, // Nivel intermedio
-    ADVANCED     // Nivel avanzado
-}
-
 // Esta clase representa un comando de Linux
 public class LinuxCommand {
 

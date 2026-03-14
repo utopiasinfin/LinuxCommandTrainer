@@ -1,4 +1,4 @@
-8# Linux Command Trainer
+# Linux Command Trainer
 
 Linux Command Trainer is a simple Java console application designed to help users learn essential Linux commands interactively.
 
