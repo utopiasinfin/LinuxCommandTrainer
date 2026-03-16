@@ -1,0 +1,1200 @@
+{
+  "version": 1,
+  "commands": [
+    {
+      "id": "pwd",
+      "difficulty": "BEGINNER",
+      "distros": ["ALL"],
+      "command": "pwd",
+      "syntax": "pwd",
+      "explain": {
+        "en": {
+          "short": "Print the current working directory.",
+          "long": "Shows the full path of the directory you are currently in. Useful when you are navigating the filesystem and want to know your exact location."
+        },
+        "de": {
+          "short": "Gibt das aktuelle Arbeitsverzeichnis aus.",
+          "long": "Zeigt den vollständigen Pfad des Verzeichnisses, in dem du dich gerade befindest. Sehr hilfreich, wenn du durch das Dateisystem navigierst und deinen genauen Standort wissen möchtest."
+        }
+      },
+      "flags": [
+        { "flag": "-L", "en": "Print logical path (follow symlinks, default).", "de": "Gibt den logischen Pfad aus (folgt Symlinks, Standard)." },
+        { "flag": "-P", "en": "Print physical path (resolve symlinks).", "de": "Gibt den physischen Pfad aus (löst Symlinks auf)." }
+      ],
+      "examples": [
+        { "cmd": "pwd", "en": "Show your current directory.", "de": "Zeigt dein aktuelles Verzeichnis." },
+        { "cmd": "pwd -P", "en": "Show the real path without symlink resolution.", "de": "Zeigt den echten Pfad ohne Symlink-Auflösung." }
+      ],
+      "pitfalls": [],
+      "accepted": ["pwd"]
+    },
+    {
+      "id": "ls",
+      "difficulty": "BEGINNER",
+      "distros": ["ALL"],
+      "command": "ls",
+      "syntax": "ls [OPTION]... [FILE]...",
+      "explain": {
+        "en": {
+          "short": "List directory contents.",
+          "long": "Shows files and folders in a directory. Combine with flags to see details, hidden files, file sizes, and sorted listings."
+        },
+        "de": {
+          "short": "Listet den Inhalt eines Verzeichnisses auf.",
+          "long": "Zeigt Dateien und Ordner in einem Verzeichnis an. Mit Optionen kannst du Details, versteckte Dateien, Dateigrößen und sortierte Listen anzeigen."
+        }
+      },
+      "flags": [
+        { "flag": "-l", "en": "Long listing format (permissions, owner, size, date).", "de": "Langes Listenformat (Rechte, Besitzer, Größe, Datum)." },
+        { "flag": "-a", "en": "Show hidden files (names starting with a dot).", "de": "Zeigt versteckte Dateien an (Namen beginnen mit Punkt)." },
+        { "flag": "-h", "en": "Human-readable sizes (use with -l).", "de": "Menschenlesbare Dateigrößen (zusammen mit -l verwenden)." },
+        { "flag": "-r", "en": "Reverse the sort order.", "de": "Sortierreihenfolge umkehren." },
+        { "flag": "-t", "en": "Sort by modification time, newest first.", "de": "Nach Änderungszeit sortieren, neueste zuerst." }
+      ],
+      "examples": [
+        { "cmd": "ls", "en": "List names in the current directory.", "de": "Listet Namen im aktuellen Verzeichnis auf." },
+        { "cmd": "ls -lah", "en": "Show all files with details and readable sizes.", "de": "Zeigt alle Dateien mit Details und lesbaren Größen." },
+        { "cmd": "ls /etc", "en": "List files in the /etc directory.", "de": "Listet Dateien im Verzeichnis /etc auf." }
+      ],
+      "pitfalls": [
+        { "en": "Hidden files start with a dot (.). Use -a to see them.", "de": "Versteckte Dateien beginnen mit einem Punkt (.). Benutze -a, um sie zu sehen." }
+      ],
+      "accepted": ["ls"]
+    },
+    {
+      "id": "cd",
+      "difficulty": "BEGINNER",
+      "distros": ["ALL"],
+      "command": "cd",
+      "syntax": "cd [DIRECTORY]",
+      "explain": {
+        "en": {
+          "short": "Change the current directory.",
+          "long": "Moves you to a different directory. Use an absolute path (e.g., /home/user) or a relative path (e.g., ../docs). Special shortcuts: '~' for home, '-' for previous directory."
+        },
+        "de": {
+          "short": "Wechselt das aktuelle Verzeichnis.",
+          "long": "Bringt dich in ein anderes Verzeichnis. Verwende einen absoluten Pfad (z.B. /home/user) oder einen relativen Pfad (z.B. ../docs). Sonderkürzel: '~' für dein Home-Verzeichnis, '-' für das vorherige Verzeichnis."
+        }
+      },
+      "flags": [],
+      "examples": [
+        { "cmd": "cd /home", "en": "Go to the /home directory.", "de": "Wechselt ins Verzeichnis /home." },
+        { "cmd": "cd ~", "en": "Go to your home directory.", "de": "Wechselt in dein Home-Verzeichnis." },
+        { "cmd": "cd ..", "en": "Go one directory up.", "de": "Geht ein Verzeichnis nach oben." },
+        { "cmd": "cd -", "en": "Go back to the previous directory.", "de": "Kehrt zum vorherigen Verzeichnis zurück." }
+      ],
+      "pitfalls": [],
+      "accepted": ["cd"]
+    },
+    {
+      "id": "mkdir",
+      "difficulty": "BEGINNER",
+      "distros": ["ALL"],
+      "command": "mkdir",
+      "syntax": "mkdir [OPTION]... DIRECTORY...",
+      "explain": {
+        "en": {
+          "short": "Create one or more directories.",
+          "long": "Makes new directories. With -p you can create nested directories in one command. Existing directories are silently ignored with -p."
+        },
+        "de": {
+          "short": "Erstellt ein oder mehrere Verzeichnisse.",
+          "long": "Legt neue Verzeichnisse an. Mit -p kannst du verschachtelte Verzeichnisse in einem Befehl erstellen. Bestehende Verzeichnisse werden mit -p stillschweigend ignoriert."
+        }
+      },
+      "flags": [
+        { "flag": "-p", "en": "Create parent directories as needed; no error if they exist.", "de": "Erstellt übergeordnete Verzeichnisse bei Bedarf; kein Fehler wenn sie schon existieren." },
+        { "flag": "-v", "en": "Print a message for each created directory.", "de": "Gibt eine Meldung für jedes erstellte Verzeichnis aus." }
+      ],
+      "examples": [
+        { "cmd": "mkdir new_folder", "en": "Create a directory called new_folder.", "de": "Erstellt ein Verzeichnis namens new_folder." },
+        { "cmd": "mkdir -p projects/linux/notes", "en": "Create nested directories in one go.", "de": "Erstellt verschachtelte Verzeichnisse in einem Schritt." }
+      ],
+      "pitfalls": [],
+      "accepted": ["mkdir"]
+    },
+    {
+      "id": "rmdir",
+      "difficulty": "BEGINNER",
+      "distros": ["ALL"],
+      "command": "rmdir",
+      "syntax": "rmdir [OPTION]... DIRECTORY...",
+      "explain": {
+        "en": {
+          "short": "Remove empty directories.",
+          "long": "Deletes directories, but only if they are empty. If the directory contains files, use 'rm -r' instead. Safer than rm -r for accidentally non-empty directories."
+        },
+        "de": {
+          "short": "Entfernt leere Verzeichnisse.",
+          "long": "Löscht Verzeichnisse, aber nur wenn sie leer sind. Wenn das Verzeichnis Dateien enthält, verwende stattdessen 'rm -r'. Sicherer als rm -r, falls du aus Versehen ein nicht-leeres Verzeichnis löschen würdest."
+        }
+      },
+      "flags": [
+        { "flag": "-p", "en": "Remove directory and its empty ancestors.", "de": "Entfernt das Verzeichnis und seine leeren übergeordneten Verzeichnisse." }
+      ],
+      "examples": [
+        { "cmd": "rmdir empty_folder", "en": "Remove the empty directory empty_folder.", "de": "Entfernt das leere Verzeichnis empty_folder." },
+        { "cmd": "rmdir -p a/b/c", "en": "Remove c, then b, then a if all are empty.", "de": "Entfernt c, dann b, dann a wenn alle leer sind." }
+      ],
+      "pitfalls": [],
+      "accepted": ["rmdir"]
+    },
+    {
+      "id": "touch",
+      "difficulty": "BEGINNER",
+      "distros": ["ALL"],
+      "command": "touch",
+      "syntax": "touch [OPTION]... FILE...",
+      "explain": {
+        "en": {
+          "short": "Create an empty file or update its timestamp.",
+          "long": "If the file does not exist, touch creates it as an empty file. If it already exists, touch updates its access and modification timestamps without changing its content."
+        },
+        "de": {
+          "short": "Erstellt eine leere Datei oder aktualisiert deren Zeitstempel.",
+          "long": "Wenn die Datei nicht existiert, erstellt touch sie als leere Datei. Wenn sie bereits existiert, aktualisiert touch den Zugriffs- und Änderungszeitstempel, ohne den Inhalt zu verändern."
+        }
+      },
+      "flags": [
+        { "flag": "-a", "en": "Only change access time.", "de": "Ändert nur die Zugriffszeit." },
+        { "flag": "-m", "en": "Only change modification time.", "de": "Ändert nur die Änderungszeit." }
+      ],
+      "examples": [
+        { "cmd": "touch myfile.txt", "en": "Create myfile.txt (or update its timestamp).", "de": "Erstellt myfile.txt (oder aktualisiert dessen Zeitstempel)." },
+        { "cmd": "touch file1.txt file2.txt", "en": "Create multiple files at once.", "de": "Erstellt mehrere Dateien auf einmal." }
+      ],
+      "pitfalls": [],
+      "accepted": ["touch"]
+    },
+    {
+      "id": "cp",
+      "difficulty": "BEGINNER",
+      "distros": ["ALL"],
+      "command": "cp",
+      "syntax": "cp [OPTION]... SOURCE DEST",
+      "explain": {
+        "en": {
+          "short": "Copy files or directories.",
+          "long": "Copies one or more files to a destination. Use -r to copy directories. Use -i to be asked before overwriting existing files."
+        },
+        "de": {
+          "short": "Kopiert Dateien oder Verzeichnisse.",
+          "long": "Kopiert eine oder mehrere Dateien an ein Ziel. Mit -r kannst du Verzeichnisse kopieren. Mit -i wirst du gefragt, bevor bestehende Dateien überschrieben werden."
+        }
+      },
+      "flags": [
+        { "flag": "-r", "en": "Copy directories recursively.", "de": "Kopiert Verzeichnisse rekursiv." },
+        { "flag": "-i", "en": "Ask before overwriting.", "de": "Fragt nach, bevor überschrieben wird." },
+        { "flag": "-v", "en": "Verbose: show what is being copied.", "de": "Ausführlich: Zeigt an, was kopiert wird." },
+        { "flag": "-p", "en": "Preserve permissions, timestamps, and ownership.", "de": "Bewahrt Rechte, Zeitstempel und Besitzer." }
+      ],
+      "examples": [
+        { "cmd": "cp file.txt backup/", "en": "Copy file.txt into the backup/ directory.", "de": "Kopiert file.txt in das Verzeichnis backup/." },
+        { "cmd": "cp -r src/ dest/", "en": "Copy the src/ directory and all its contents to dest/.", "de": "Kopiert das Verzeichnis src/ und alle Inhalte nach dest/." },
+        { "cmd": "cp -i important.txt /tmp/", "en": "Copy with confirmation if the target exists.", "de": "Kopiert mit Bestätigung, wenn das Ziel existiert." }
+      ],
+      "pitfalls": [],
+      "accepted": ["cp"]
+    },
+    {
+      "id": "mv",
+      "difficulty": "BEGINNER",
+      "distros": ["ALL"],
+      "command": "mv",
+      "syntax": "mv [OPTION]... SOURCE DEST",
+      "explain": {
+        "en": {
+          "short": "Move or rename files and directories.",
+          "long": "Moves files to a new location or renames them. If source and destination are in the same directory, mv acts as a rename. Use -i to confirm before overwriting."
+        },
+        "de": {
+          "short": "Verschiebt oder benennt Dateien und Verzeichnisse um.",
+          "long": "Verschiebt Dateien an einen neuen Ort oder benennt sie um. Wenn Quelle und Ziel im gleichen Verzeichnis sind, wirkt mv wie ein Umbenennen. Verwende -i zur Bestätigung vor dem Überschreiben."
+        }
+      },
+      "flags": [
+        { "flag": "-i", "en": "Ask before overwriting.", "de": "Fragt nach, bevor überschrieben wird." },
+        { "flag": "-v", "en": "Verbose: show what is being moved.", "de": "Ausführlich: Zeigt an, was verschoben wird." },
+        { "flag": "-n", "en": "Do not overwrite existing files.", "de": "Überschreibt keine bestehenden Dateien." }
+      ],
+      "examples": [
+        { "cmd": "mv file.txt file_old.txt", "en": "Rename file.txt to file_old.txt.", "de": "Benennt file.txt in file_old.txt um." },
+        { "cmd": "mv report.pdf /home/user/docs/", "en": "Move report.pdf to the docs/ directory.", "de": "Verschiebt report.pdf in das Verzeichnis docs/." }
+      ],
+      "pitfalls": [],
+      "accepted": ["mv"]
+    },
+    {
+      "id": "rm",
+      "difficulty": "BEGINNER",
+      "distros": ["ALL"],
+      "command": "rm",
+      "syntax": "rm [OPTION]... FILE...",
+      "explain": {
+        "en": {
+          "short": "Remove files or directories.",
+          "long": "Deletes files permanently. There is no trash/recycle bin. Use -r to remove directories and -i to be prompted before each deletion."
+        },
+        "de": {
+          "short": "Löscht Dateien oder Verzeichnisse dauerhaft.",
+          "long": "Löscht Dateien dauerhaft. Es gibt keinen Papierkorb. Verwende -r zum Löschen von Verzeichnissen und -i, um vor jedem Löschen nachgefragt zu werden."
+        }
+      },
+      "flags": [
+        { "flag": "-i", "en": "Ask before each removal.", "de": "Fragt vor jedem Löschen nach." },
+        { "flag": "-r", "en": "Remove directories and their contents recursively.", "de": "Löscht Verzeichnisse und Inhalte rekursiv." },
+        { "flag": "-f", "en": "Force removal, ignore nonexistent files, no prompts.", "de": "Erzwingt das Löschen, ignoriert fehlende Dateien, keine Nachfragen." },
+        { "flag": "-v", "en": "Verbose: show what is being removed.", "de": "Ausführlich: zeigt an, was gelöscht wird." }
+      ],
+      "examples": [
+        { "cmd": "rm file.txt", "en": "Delete file.txt.", "de": "Löscht file.txt." },
+        { "cmd": "rm -i file.txt", "en": "Delete with confirmation prompt.", "de": "Löscht mit Bestätigungsabfrage." },
+        { "cmd": "rm -r folder/", "en": "Delete a folder and all its contents.", "de": "Löscht einen Ordner und all seinen Inhalt." }
+      ],
+      "pitfalls": [
+        {
+          "en": "Avoid 'rm -rf /' or 'rm -rf ~/' — these can destroy your entire system or home directory.",
+          "de": "Vermeide 'rm -rf /' oder 'rm -rf ~/' — das kann dein gesamtes System oder dein Home-Verzeichnis zerstören."
+        },
+        {
+          "en": "There is no undo. Double-check the path before pressing Enter.",
+          "de": "Es gibt kein Rückgängig machen. Überprüfe den Pfad, bevor du Enter drückst."
+        }
+      ],
+      "accepted": ["rm"]
+    },
+    {
+      "id": "cat",
+      "difficulty": "BEGINNER",
+      "distros": ["ALL"],
+      "command": "cat",
+      "syntax": "cat [OPTION]... [FILE]...",
+      "explain": {
+        "en": {
+          "short": "Display file content or concatenate files.",
+          "long": "Prints the content of one or more files to the terminal. Can also merge multiple files (concatenate). For large files, prefer 'less' to scroll through the content."
+        },
+        "de": {
+          "short": "Zeigt Dateiinhalt an oder verbindet Dateien.",
+          "long": "Gibt den Inhalt einer oder mehrerer Dateien im Terminal aus. Kann auch mehrere Dateien zusammenführen (verketten). Für große Dateien ist 'less' besser, damit du durch den Inhalt scrollen kannst."
+        }
+      },
+      "flags": [
+        { "flag": "-n", "en": "Number all output lines.", "de": "Nummeriert alle Ausgabezeilen." },
+        { "flag": "-A", "en": "Show non-printable characters (useful for debugging).", "de": "Zeigt nicht druckbare Zeichen an (hilfreich beim Debuggen)." }
+      ],
+      "examples": [
+        { "cmd": "cat file.txt", "en": "Print file.txt to the terminal.", "de": "Gibt file.txt im Terminal aus." },
+        { "cmd": "cat file1.txt file2.txt > merged.txt", "en": "Merge two files into merged.txt.", "de": "Verbindet zwei Dateien zu merged.txt." },
+        { "cmd": "cat -n script.sh", "en": "Print script.sh with line numbers.", "de": "Gibt script.sh mit Zeilennummern aus." }
+      ],
+      "pitfalls": [],
+      "accepted": ["cat"]
+    },
+    {
+      "id": "less",
+      "difficulty": "BEGINNER",
+      "distros": ["ALL"],
+      "command": "less",
+      "syntax": "less [OPTION]... [FILE]",
+      "explain": {
+        "en": {
+          "short": "View file content page by page.",
+          "long": "Opens a file in a scrollable viewer. Use arrow keys or Page Up/Down to navigate, '/' to search forward, 'n' for next match, and 'q' to quit."
+        },
+        "de": {
+          "short": "Zeigt Dateiinhalt seitenweise an.",
+          "long": "Öffnet eine Datei in einem scrollbaren Viewer. Verwende Pfeiltasten oder Bild-auf/-ab zum Navigieren, '/' für die Vorwärtssuche, 'n' für den nächsten Treffer und 'q' zum Beenden."
+        }
+      },
+      "flags": [
+        { "flag": "-N", "en": "Show line numbers.", "de": "Zeigt Zeilennummern an." },
+        { "flag": "-i", "en": "Case-insensitive search.", "de": "Groß-/Kleinschreibung ignorieren bei Suche." },
+        { "flag": "+F", "en": "Follow mode (like tail -f).", "de": "Folge-Modus (wie tail -f)." }
+      ],
+      "examples": [
+        { "cmd": "less /var/log/syslog", "en": "Browse the system log file.", "de": "Durchsucht die Systemlog-Datei." },
+        { "cmd": "less -N file.txt", "en": "View file.txt with line numbers.", "de": "Zeigt file.txt mit Zeilennummern an." }
+      ],
+      "pitfalls": [],
+      "accepted": ["less"]
+    },
+    {
+      "id": "head",
+      "difficulty": "BEGINNER",
+      "distros": ["ALL"],
+      "command": "head",
+      "syntax": "head [OPTION]... [FILE]...",
+      "explain": {
+        "en": {
+          "short": "Show the first lines of a file.",
+          "long": "Prints the first 10 lines of a file by default. Use -n to specify a different number of lines. Useful for quickly inspecting the beginning of large files."
+        },
+        "de": {
+          "short": "Zeigt die ersten Zeilen einer Datei.",
+          "long": "Gibt standardmäßig die ersten 10 Zeilen einer Datei aus. Mit -n kannst du eine andere Anzahl von Zeilen angeben. Hilfreich, um schnell den Anfang großer Dateien zu prüfen."
+        }
+      },
+      "flags": [
+        { "flag": "-n NUM", "en": "Show the first NUM lines (default: 10).", "de": "Zeigt die ersten NUM Zeilen (Standard: 10)." },
+        { "flag": "-c NUM", "en": "Show the first NUM bytes.", "de": "Zeigt die ersten NUM Bytes." }
+      ],
+      "examples": [
+        { "cmd": "head file.txt", "en": "Show the first 10 lines of file.txt.", "de": "Zeigt die ersten 10 Zeilen von file.txt." },
+        { "cmd": "head -n 5 file.txt", "en": "Show only the first 5 lines.", "de": "Zeigt nur die ersten 5 Zeilen." }
+      ],
+      "pitfalls": [],
+      "accepted": ["head"]
+    },
+    {
+      "id": "tail",
+      "difficulty": "BEGINNER",
+      "distros": ["ALL"],
+      "command": "tail",
+      "syntax": "tail [OPTION]... [FILE]...",
+      "explain": {
+        "en": {
+          "short": "Show the last lines of a file.",
+          "long": "Prints the last 10 lines of a file by default. Very useful for monitoring log files in real time with -f (follow mode)."
+        },
+        "de": {
+          "short": "Zeigt die letzten Zeilen einer Datei.",
+          "long": "Gibt standardmäßig die letzten 10 Zeilen einer Datei aus. Sehr nützlich, um Log-Dateien in Echtzeit mit -f (Folge-Modus) zu überwachen."
+        }
+      },
+      "flags": [
+        { "flag": "-n NUM", "en": "Show the last NUM lines (default: 10).", "de": "Zeigt die letzten NUM Zeilen (Standard: 10)." },
+        { "flag": "-f", "en": "Follow mode: show new lines as they are written.", "de": "Folge-Modus: zeigt neue Zeilen, während sie geschrieben werden." }
+      ],
+      "examples": [
+        { "cmd": "tail file.txt", "en": "Show the last 10 lines of file.txt.", "de": "Zeigt die letzten 10 Zeilen von file.txt." },
+        { "cmd": "tail -f /var/log/auth.log", "en": "Monitor the authentication log in real time.", "de": "Überwacht das Authentifizierungs-Log in Echtzeit." },
+        { "cmd": "tail -n 20 app.log", "en": "Show the last 20 lines of app.log.", "de": "Zeigt die letzten 20 Zeilen von app.log." }
+      ],
+      "pitfalls": [],
+      "accepted": ["tail"]
+    },
+    {
+      "id": "echo",
+      "difficulty": "BEGINNER",
+      "distros": ["ALL"],
+      "command": "echo",
+      "syntax": "echo [OPTION]... [STRING]...",
+      "explain": {
+        "en": {
+          "short": "Print text or variable values to the terminal.",
+          "long": "Outputs text to stdout. Commonly used in shell scripts to show messages or write text to files. Can also expand variables like $HOME or $USER."
+        },
+        "de": {
+          "short": "Gibt Text oder Variablenwerte im Terminal aus.",
+          "long": "Gibt Text auf die Standardausgabe (stdout) aus. Wird häufig in Shell-Skripten verwendet, um Nachrichten anzuzeigen oder Text in Dateien zu schreiben. Kann auch Variablen wie $HOME oder $USER erweitern."
+        }
+      },
+      "flags": [
+        { "flag": "-n", "en": "Do not output a trailing newline.", "de": "Gibt kein abschließendes Zeilenumbruch aus." },
+        { "flag": "-e", "en": "Enable interpretation of escape sequences (\\n, \\t, etc.).", "de": "Aktiviert die Interpretation von Escape-Sequenzen (\\n, \\t usw.)." }
+      ],
+      "examples": [
+        { "cmd": "echo Hello World", "en": "Print 'Hello World' to the terminal.", "de": "Gibt 'Hello World' im Terminal aus." },
+        { "cmd": "echo $HOME", "en": "Print the value of the HOME environment variable.", "de": "Gibt den Wert der Umgebungsvariable HOME aus." },
+        { "cmd": "echo 'text' > file.txt", "en": "Write 'text' to file.txt (creates or overwrites).", "de": "Schreibt 'text' in file.txt (erstellt oder überschreibt)." }
+      ],
+      "pitfalls": [],
+      "accepted": ["echo"]
+    },
+    {
+      "id": "man",
+      "difficulty": "BEGINNER",
+      "distros": ["ALL"],
+      "command": "man",
+      "syntax": "man [SECTION] NAME",
+      "explain": {
+        "en": {
+          "short": "Show the manual page for a command.",
+          "long": "Opens the built-in documentation for any command. Press 'q' to quit, '/' to search within the manual. The best way to learn about any command offline."
+        },
+        "de": {
+          "short": "Zeigt die Handbuchseite eines Befehls.",
+          "long": "Öffnet die eingebaute Dokumentation für jeden Befehl. Drücke 'q' zum Beenden und '/' für die Suche innerhalb des Handbuchs. Der beste Weg, offline mehr über einen Befehl zu erfahren."
+        }
+      },
+      "flags": [
+        { "flag": "-k KEYWORD", "en": "Search for commands related to a keyword (like apropos).", "de": "Sucht nach Befehlen, die mit einem Schlüsselwort zusammenhängen (wie apropos)." }
+      ],
+      "examples": [
+        { "cmd": "man ls", "en": "Open the manual for the ls command.", "de": "Öffnet das Handbuch für den Befehl ls." },
+        { "cmd": "man 5 fstab", "en": "Open section 5 of the fstab manual.", "de": "Öffnet Abschnitt 5 des fstab-Handbuchs." },
+        { "cmd": "man -k copy", "en": "Find all commands related to 'copy'.", "de": "Findet alle Befehle, die mit 'copy' zusammenhängen." }
+      ],
+      "pitfalls": [],
+      "accepted": ["man"]
+    },
+    {
+      "id": "history",
+      "difficulty": "BEGINNER",
+      "distros": ["ALL"],
+      "command": "history",
+      "syntax": "history [N]",
+      "explain": {
+        "en": {
+          "short": "Show the command history list.",
+          "long": "Displays previously executed commands with their numbers. You can re-run a command with !N (where N is the number). Useful for repeating complex commands."
+        },
+        "de": {
+          "short": "Zeigt die Liste der zuletzt eingegebenen Befehle.",
+          "long": "Zeigt früher ausgeführte Befehle mit ihrer Nummer. Mit !N kannst du Befehl Nummer N wiederholen. Nützlich, um komplexe Befehle erneut auszuführen."
+        }
+      },
+      "flags": [
+        { "flag": "-c", "en": "Clear the entire history list.", "de": "Löscht die gesamte Befehlshistorie." }
+      ],
+      "examples": [
+        { "cmd": "history", "en": "Show all recent commands.", "de": "Zeigt alle zuletzt eingegebenen Befehle." },
+        { "cmd": "history 10", "en": "Show only the last 10 commands.", "de": "Zeigt nur die letzten 10 Befehle." },
+        { "cmd": "!42", "en": "Re-run command number 42 from the history.", "de": "Führt Befehl Nummer 42 aus der Historie erneut aus." }
+      ],
+      "pitfalls": [],
+      "accepted": ["history"]
+    },
+    {
+      "id": "grep",
+      "difficulty": "INTERMEDIATE",
+      "distros": ["ALL"],
+      "command": "grep",
+      "syntax": "grep [OPTION]... PATTERN [FILE]...",
+      "explain": {
+        "en": {
+          "short": "Search for text patterns inside files.",
+          "long": "Finds lines matching a pattern in one or more files. Essential for searching logs and configuration files. Supports regular expressions with -E. Can also be used with pipes."
+        },
+        "de": {
+          "short": "Sucht nach Textmustern in Dateien.",
+          "long": "Findet Zeilen, die einem Muster in einer oder mehreren Dateien entsprechen. Unverzichtbar für die Suche in Logs und Konfigurationsdateien. Unterstützt reguläre Ausdrücke mit -E. Kann auch mit Pipes verwendet werden."
+        }
+      },
+      "flags": [
+        { "flag": "-i", "en": "Case-insensitive matching.", "de": "Suche ohne Berücksichtigung von Groß-/Kleinschreibung." },
+        { "flag": "-n", "en": "Show line numbers with matches.", "de": "Zeigt Zeilennummern zusammen mit den Treffern." },
+        { "flag": "-r", "en": "Search recursively in directories.", "de": "Sucht rekursiv in Verzeichnissen." },
+        { "flag": "-v", "en": "Invert match: show lines that do NOT match.", "de": "Invertierte Suche: zeigt Zeilen, die NICHT übereinstimmen." },
+        { "flag": "-c", "en": "Print only the count of matching lines.", "de": "Gibt nur die Anzahl der übereinstimmenden Zeilen aus." },
+        { "flag": "-E", "en": "Use extended regular expressions.", "de": "Verwendet erweiterte reguläre Ausdrücke." }
+      ],
+      "examples": [
+        { "cmd": "grep 'error' app.log", "en": "Find lines containing 'error' in app.log.", "de": "Findet Zeilen mit 'error' in app.log." },
+        { "cmd": "grep -in 'failed' app.log", "en": "Case-insensitive search with line numbers.", "de": "Suche ohne Groß-/Kleinschreibung mit Zeilennummern." },
+        { "cmd": "grep -r 'TODO' src/", "en": "Search all files under src/ recursively.", "de": "Sucht rekursiv in allen Dateien unter src/." },
+        { "cmd": "grep -v '^#' config.conf", "en": "Show non-comment lines in a config file.", "de": "Zeigt Nicht-Kommentarzeilen in einer Konfigurationsdatei." }
+      ],
+      "pitfalls": [
+        {
+          "en": "If your pattern contains spaces or special characters, wrap it in single quotes to prevent shell interpretation.",
+          "de": "Wenn dein Muster Leerzeichen oder Sonderzeichen enthält, setze es in einfache Anführungszeichen, damit die Shell es nicht interpretiert."
+        }
+      ],
+      "accepted": ["grep"]
+    },
+    {
+      "id": "find",
+      "difficulty": "INTERMEDIATE",
+      "distros": ["ALL"],
+      "command": "find",
+      "syntax": "find [PATH] [EXPRESSION]",
+      "explain": {
+        "en": {
+          "short": "Find files and directories matching criteria.",
+          "long": "Searches a directory tree for files matching conditions like name, type, size, or modification time. Can also execute commands on found files with -exec."
+        },
+        "de": {
+          "short": "Sucht Dateien und Verzeichnisse nach bestimmten Kriterien.",
+          "long": "Durchsucht einen Verzeichnisbaum nach Dateien, die Bedingungen wie Name, Typ, Größe oder Änderungszeit erfüllen. Kann mit -exec auch Befehle auf gefundenen Dateien ausführen."
+        }
+      },
+      "flags": [
+        { "flag": "-name PATTERN", "en": "Find files by name (case-sensitive).", "de": "Sucht Dateien nach Name (Groß-/Kleinschreibung beachten)." },
+        { "flag": "-iname PATTERN", "en": "Find files by name (case-insensitive).", "de": "Sucht Dateien nach Name (Groß-/Kleinschreibung ignorieren)." },
+        { "flag": "-type f", "en": "Match only regular files.", "de": "Nur reguläre Dateien treffen." },
+        { "flag": "-type d", "en": "Match only directories.", "de": "Nur Verzeichnisse treffen." },
+        { "flag": "-exec CMD {} ;", "en": "Execute CMD on each found file.", "de": "Führt CMD auf jeder gefundenen Datei aus." },
+        { "flag": "-mtime N", "en": "Find files modified N days ago.", "de": "Findet Dateien, die vor N Tagen geändert wurden." }
+      ],
+      "examples": [
+        { "cmd": "find /home -name '*.txt'", "en": "Find all .txt files under /home.", "de": "Findet alle .txt-Dateien unter /home." },
+        { "cmd": "find . -type f -name '*.sh'", "en": "Find all shell scripts in the current tree.", "de": "Findet alle Shell-Skripte im aktuellen Verzeichnisbaum." },
+        { "cmd": "find /tmp -mtime +7 -type f", "en": "Find files older than 7 days in /tmp.", "de": "Findet Dateien in /tmp, die älter als 7 Tage sind." }
+      ],
+      "pitfalls": [
+        {
+          "en": "Using -exec with rm can permanently delete files. Always test with -print first before adding -exec rm.",
+          "de": "Die Verwendung von -exec mit rm kann Dateien dauerhaft löschen. Teste immer zuerst mit -print, bevor du -exec rm hinzufügst."
+        }
+      ],
+      "accepted": ["find"]
+    },
+    {
+      "id": "wc",
+      "difficulty": "INTERMEDIATE",
+      "distros": ["ALL"],
+      "command": "wc",
+      "syntax": "wc [OPTION]... [FILE]...",
+      "explain": {
+        "en": {
+          "short": "Count lines, words, and characters in files.",
+          "long": "Outputs the number of lines, words, and bytes in a file. Useful combined with pipes to count command output, for example counting the number of running processes."
+        },
+        "de": {
+          "short": "Zählt Zeilen, Wörter und Zeichen in Dateien.",
+          "long": "Gibt die Anzahl von Zeilen, Wörtern und Bytes einer Datei aus. Nützlich in Kombination mit Pipes, um Befehlsausgaben zu zählen, z.B. die Anzahl laufender Prozesse."
+        }
+      },
+      "flags": [
+        { "flag": "-l", "en": "Count lines only.", "de": "Nur Zeilen zählen." },
+        { "flag": "-w", "en": "Count words only.", "de": "Nur Wörter zählen." },
+        { "flag": "-c", "en": "Count bytes only.", "de": "Nur Bytes zählen." }
+      ],
+      "examples": [
+        { "cmd": "wc file.txt", "en": "Show line, word, and byte count of file.txt.", "de": "Zeigt Zeilen-, Wort- und Byte-Anzahl von file.txt." },
+        { "cmd": "wc -l file.txt", "en": "Count only the number of lines.", "de": "Zählt nur die Anzahl der Zeilen." },
+        { "cmd": "ls | wc -l", "en": "Count the number of items in the current directory.", "de": "Zählt die Anzahl der Elemente im aktuellen Verzeichnis." }
+      ],
+      "pitfalls": [],
+      "accepted": ["wc"]
+    },
+    {
+      "id": "sort",
+      "difficulty": "INTERMEDIATE",
+      "distros": ["ALL"],
+      "command": "sort",
+      "syntax": "sort [OPTION]... [FILE]...",
+      "explain": {
+        "en": {
+          "short": "Sort lines of text files.",
+          "long": "Sorts lines alphabetically by default. Can sort numerically (-n), in reverse (-r), or remove duplicates (-u). Often used in pipelines to organize command output."
+        },
+        "de": {
+          "short": "Sortiert Zeilen von Textdateien.",
+          "long": "Sortiert Zeilen standardmäßig alphabetisch. Kann numerisch (-n), in umgekehrter Reihenfolge (-r) sortieren oder Duplikate entfernen (-u). Wird häufig in Pipelines verwendet, um Befehlsausgaben zu ordnen."
+        }
+      },
+      "flags": [
+        { "flag": "-n", "en": "Sort numerically.", "de": "Numerisch sortieren." },
+        { "flag": "-r", "en": "Sort in reverse order.", "de": "In umgekehrter Reihenfolge sortieren." },
+        { "flag": "-u", "en": "Output only unique lines (remove duplicates).", "de": "Nur eindeutige Zeilen ausgeben (Duplikate entfernen)." },
+        { "flag": "-k N", "en": "Sort by the Nth column/field.", "de": "Nach der N-ten Spalte/Feld sortieren." }
+      ],
+      "examples": [
+        { "cmd": "sort names.txt", "en": "Sort names.txt alphabetically.", "de": "Sortiert names.txt alphabetisch." },
+        { "cmd": "sort -n numbers.txt", "en": "Sort numbers.txt numerically.", "de": "Sortiert numbers.txt numerisch." },
+        { "cmd": "sort -rn scores.txt", "en": "Sort scores from highest to lowest.", "de": "Sortiert Punktzahlen von hoch nach niedrig." }
+      ],
+      "pitfalls": [],
+      "accepted": ["sort"]
+    },
+    {
+      "id": "uniq",
+      "difficulty": "INTERMEDIATE",
+      "distros": ["ALL"],
+      "command": "uniq",
+      "syntax": "uniq [OPTION]... [INPUT [OUTPUT]]",
+      "explain": {
+        "en": {
+          "short": "Filter or report duplicate adjacent lines.",
+          "long": "Removes or counts consecutive duplicate lines. Note: uniq only detects adjacent duplicates, so you often need to sort the input first before piping it to uniq."
+        },
+        "de": {
+          "short": "Filtert oder meldet benachbarte doppelte Zeilen.",
+          "long": "Entfernt oder zählt aufeinanderfolgende doppelte Zeilen. Beachte: uniq erkennt nur direkt aufeinanderfolgende Duplikate, daher musst du die Eingabe oft zuerst sortieren, bevor du sie an uniq weiterleitest."
+        }
+      },
+      "flags": [
+        { "flag": "-c", "en": "Prefix lines with the count of occurrences.", "de": "Zeilen mit der Anzahl der Vorkommen voranstellen." },
+        { "flag": "-d", "en": "Only print duplicate lines.", "de": "Nur doppelte Zeilen ausgeben." },
+        { "flag": "-u", "en": "Only print unique (non-duplicate) lines.", "de": "Nur eindeutige (nicht doppelte) Zeilen ausgeben." }
+      ],
+      "examples": [
+        { "cmd": "sort file.txt | uniq", "en": "Remove duplicate lines from file.txt.", "de": "Entfernt doppelte Zeilen aus file.txt." },
+        { "cmd": "sort file.txt | uniq -c", "en": "Count how often each line appears.", "de": "Zählt, wie oft jede Zeile vorkommt." },
+        { "cmd": "sort file.txt | uniq -d", "en": "Show only the lines that appear more than once.", "de": "Zeigt nur die Zeilen, die mehr als einmal vorkommen." }
+      ],
+      "pitfalls": [
+        {
+          "en": "uniq only removes adjacent duplicates. Always pipe through sort first: sort file.txt | uniq",
+          "de": "uniq entfernt nur direkt benachbarte Duplikate. Leite die Ausgabe immer zuerst durch sort: sort file.txt | uniq"
+        }
+      ],
+      "accepted": ["uniq"]
+    },
+    {
+      "id": "cut",
+      "difficulty": "INTERMEDIATE",
+      "distros": ["ALL"],
+      "command": "cut",
+      "syntax": "cut OPTION... [FILE]...",
+      "explain": {
+        "en": {
+          "short": "Extract columns or fields from each line.",
+          "long": "Cuts out sections from each line of a file or piped input. Common use: extract a specific column from CSV or tab-delimited data. Use -d to set the delimiter and -f to choose the field."
+        },
+        "de": {
+          "short": "Extrahiert Spalten oder Felder aus jeder Zeile.",
+          "long": "Schneidet Abschnitte aus jeder Zeile einer Datei oder einer weitergeleiteten Eingabe heraus. Häufige Verwendung: eine bestimmte Spalte aus CSV- oder tabulatorgetrennten Daten extrahieren. Verwende -d für den Trennzeichen und -f für das Feld."
+        }
+      },
+      "flags": [
+        { "flag": "-d DELIM", "en": "Use DELIM as the field delimiter (default: tab).", "de": "Verwendet DELIM als Feldtrennzeichen (Standard: Tab)." },
+        { "flag": "-f N", "en": "Select only field N.", "de": "Wählt nur Feld N aus." },
+        { "flag": "-c N", "en": "Select only character position N.", "de": "Wählt nur Zeichenposition N aus." }
+      ],
+      "examples": [
+        { "cmd": "cut -d':' -f1 /etc/passwd", "en": "Extract usernames from /etc/passwd.", "de": "Extrahiert Benutzernamen aus /etc/passwd." },
+        { "cmd": "cut -d',' -f2 data.csv", "en": "Get the second column from a CSV file.", "de": "Holt die zweite Spalte aus einer CSV-Datei." }
+      ],
+      "pitfalls": [],
+      "accepted": ["cut"]
+    },
+    {
+      "id": "tr",
+      "difficulty": "INTERMEDIATE",
+      "distros": ["ALL"],
+      "command": "tr",
+      "syntax": "tr [OPTION]... SET1 [SET2]",
+      "explain": {
+        "en": {
+          "short": "Translate or delete characters from input.",
+          "long": "Reads from stdin and replaces or deletes characters. Useful for converting lowercase to uppercase, removing whitespace, or squeezing repeated characters."
+        },
+        "de": {
+          "short": "Übersetzt oder löscht Zeichen aus der Eingabe.",
+          "long": "Liest von stdin und ersetzt oder löscht Zeichen. Nützlich zum Umwandeln von Klein- in Großbuchstaben, zum Entfernen von Leerzeichen oder zum Zusammendrücken von wiederholten Zeichen."
+        }
+      },
+      "flags": [
+        { "flag": "-d", "en": "Delete characters in SET1 (no SET2 needed).", "de": "Löscht Zeichen aus SET1 (kein SET2 notwendig)." },
+        { "flag": "-s", "en": "Squeeze repeated characters in SET1 to a single character.", "de": "Drückt wiederholte Zeichen aus SET1 zu einem einzigen Zeichen zusammen." }
+      ],
+      "examples": [
+        { "cmd": "echo 'hello' | tr 'a-z' 'A-Z'", "en": "Convert lowercase to uppercase.", "de": "Wandelt Kleinbuchstaben in Großbuchstaben um." },
+        { "cmd": "echo 'hello world' | tr -d ' '", "en": "Remove all spaces.", "de": "Entfernt alle Leerzeichen." },
+        { "cmd": "cat file.txt | tr -s ' '", "en": "Squeeze multiple spaces into one.", "de": "Drückt mehrere Leerzeichen zu einem zusammen." }
+      ],
+      "pitfalls": [],
+      "accepted": ["tr"]
+    },
+    {
+      "id": "xargs",
+      "difficulty": "INTERMEDIATE",
+      "distros": ["ALL"],
+      "command": "xargs",
+      "syntax": "xargs [OPTION]... [COMMAND]",
+      "explain": {
+        "en": {
+          "short": "Build and run commands from standard input.",
+          "long": "Takes input (usually piped) and passes it as arguments to another command. Very powerful in combination with find or grep. Without -I, arguments are appended at the end of the command."
+        },
+        "de": {
+          "short": "Baut Befehle aus der Standardeingabe und führt sie aus.",
+          "long": "Nimmt Eingaben (meist per Pipe) und übergibt sie als Argumente an einen anderen Befehl. Sehr mächtig in Kombination mit find oder grep. Ohne -I werden Argumente am Ende des Befehls angehängt."
+        }
+      },
+      "flags": [
+        { "flag": "-I {}", "en": "Use {} as placeholder for the input item.", "de": "Verwendet {} als Platzhalter für das Eingabeelement." },
+        { "flag": "-n N", "en": "Use at most N arguments per command line.", "de": "Verwendet höchstens N Argumente pro Befehlszeile." },
+        { "flag": "-p", "en": "Prompt before executing each command.", "de": "Fragt vor der Ausführung jedes Befehls nach." }
+      ],
+      "examples": [
+        { "cmd": "find . -name '*.log' | xargs rm", "en": "Delete all .log files found.", "de": "Löscht alle gefundenen .log-Dateien." },
+        { "cmd": "echo 'file1 file2' | xargs ls -l", "en": "List details of multiple files.", "de": "Listet Details von mehreren Dateien auf." }
+      ],
+      "pitfalls": [
+        {
+          "en": "Combining xargs with rm is powerful but dangerous. Use -p to confirm each operation, or test with 'echo' first.",
+          "de": "Die Kombination von xargs mit rm ist mächtig, aber gefährlich. Verwende -p, um jeden Vorgang zu bestätigen, oder teste zuerst mit 'echo'."
+        }
+      ],
+      "accepted": ["xargs"]
+    },
+    {
+      "id": "tee",
+      "difficulty": "INTERMEDIATE",
+      "distros": ["ALL"],
+      "command": "tee",
+      "syntax": "tee [OPTION]... [FILE]...",
+      "explain": {
+        "en": {
+          "short": "Read stdin and write to both stdout and a file.",
+          "long": "Like a T-junction: the input goes to the screen and also to a file simultaneously. Great for logging command output while still seeing it live."
+        },
+        "de": {
+          "short": "Liest stdin und schreibt gleichzeitig auf stdout und in eine Datei.",
+          "long": "Wie eine T-Kreuzung: Die Eingabe geht gleichzeitig auf den Bildschirm und in eine Datei. Ideal zum Protokollieren von Befehlsausgaben, während du sie live siehst."
+        }
+      },
+      "flags": [
+        { "flag": "-a", "en": "Append to the file instead of overwriting.", "de": "An die Datei anhängen statt überschreiben." }
+      ],
+      "examples": [
+        { "cmd": "ls -lah | tee listing.txt", "en": "Show directory listing and save it to listing.txt.", "de": "Zeigt die Verzeichnisliste und speichert sie in listing.txt." },
+        { "cmd": "make 2>&1 | tee build.log", "en": "Save build output (including errors) to build.log.", "de": "Speichert die Build-Ausgabe (einschließlich Fehler) in build.log." }
+      ],
+      "pitfalls": [],
+      "accepted": ["tee"]
+    },
+    {
+      "id": "tar",
+      "difficulty": "INTERMEDIATE",
+      "distros": ["ALL"],
+      "command": "tar",
+      "syntax": "tar [OPTION]... [FILE]...",
+      "explain": {
+        "en": {
+          "short": "Create or extract archive files (and compress them).",
+          "long": "Bundles multiple files and directories into a single archive (.tar). Combined with compression options (-z for gzip, -j for bzip2, -J for xz) it creates compressed archives (.tar.gz, .tar.bz2, etc.)."
+        },
+        "de": {
+          "short": "Erstellt oder entpackt Archivdateien (und komprimiert sie).",
+          "long": "Bündelt mehrere Dateien und Verzeichnisse in ein einzelnes Archiv (.tar). In Kombination mit Komprimierungsoptionen (-z für gzip, -j für bzip2, -J für xz) erstellt es komprimierte Archive (.tar.gz, .tar.bz2 usw.)."
+        }
+      },
+      "flags": [
+        { "flag": "-c", "en": "Create a new archive.", "de": "Erstellt ein neues Archiv." },
+        { "flag": "-x", "en": "Extract files from an archive.", "de": "Entpackt Dateien aus einem Archiv." },
+        { "flag": "-z", "en": "Compress/decompress with gzip.", "de": "Komprimiert/dekomprimiert mit gzip." },
+        { "flag": "-v", "en": "Verbose: list files being processed.", "de": "Ausführlich: listet verarbeitete Dateien auf." },
+        { "flag": "-f FILE", "en": "Specify the archive filename.", "de": "Gibt den Dateinamen des Archivs an." }
+      ],
+      "examples": [
+        { "cmd": "tar -czvf archive.tar.gz folder/", "en": "Create a gzip-compressed archive of folder/.", "de": "Erstellt ein gzip-komprimiertes Archiv von folder/." },
+        { "cmd": "tar -xzvf archive.tar.gz", "en": "Extract a .tar.gz archive.", "de": "Entpackt ein .tar.gz-Archiv." },
+        { "cmd": "tar -tf archive.tar.gz", "en": "List the contents of an archive without extracting.", "de": "Listet den Inhalt eines Archivs ohne Entpacken auf." }
+      ],
+      "pitfalls": [],
+      "accepted": ["tar"]
+    },
+    {
+      "id": "chmod",
+      "difficulty": "INTERMEDIATE",
+      "distros": ["ALL"],
+      "command": "chmod",
+      "syntax": "chmod [OPTION]... MODE FILE...",
+      "explain": {
+        "en": {
+          "short": "Change file or directory permissions.",
+          "long": "Controls who can read, write, or execute a file. Permissions can be set using symbolic mode (u+x, go-w) or octal numeric mode (e.g., 644, 755). The three groups are: u=user/owner, g=group, o=others."
+        },
+        "de": {
+          "short": "Ändert Datei- oder Verzeichnisrechte.",
+          "long": "Steuert, wer eine Datei lesen, schreiben oder ausführen darf. Rechte können im symbolischen Modus (u+x, go-w) oder im oktalen numerischen Modus (z.B. 644, 755) gesetzt werden. Die drei Gruppen sind: u=Benutzer/Besitzer, g=Gruppe, o=Andere."
+        }
+      },
+      "flags": [
+        { "flag": "-R", "en": "Change permissions recursively for directories.", "de": "Ändert Rechte rekursiv für Verzeichnisse." },
+        { "flag": "-v", "en": "Verbose: show each file being changed.", "de": "Ausführlich: zeigt jede geänderte Datei." }
+      ],
+      "examples": [
+        { "cmd": "chmod u+x script.sh", "en": "Make script.sh executable for the owner.", "de": "Macht script.sh für den Besitzer ausführbar." },
+        { "cmd": "chmod 644 file.txt", "en": "Owner can read/write; others can only read.", "de": "Besitzer kann lesen/schreiben; andere nur lesen." },
+        { "cmd": "chmod -R 755 bin/", "en": "Recursively set permissions on the bin/ directory.", "de": "Setzt Rechte rekursiv im Verzeichnis bin/." }
+      ],
+      "pitfalls": [
+        {
+          "en": "Be careful with -R on system directories: wrong permissions can break programs or logins.",
+          "de": "Vorsicht mit -R in Systemverzeichnissen: falsche Rechte können Programme oder den Login kaputtmachen."
+        }
+      ],
+      "accepted": ["chmod"]
+    },
+    {
+      "id": "chown",
+      "difficulty": "INTERMEDIATE",
+      "distros": ["ALL"],
+      "command": "chown",
+      "syntax": "chown [OPTION]... OWNER[:GROUP] FILE...",
+      "explain": {
+        "en": {
+          "short": "Change the owner and/or group of a file.",
+          "long": "Changes which user (and optionally which group) owns a file. Only root can give ownership to another user. Use -R to change ownership recursively in a directory tree."
+        },
+        "de": {
+          "short": "Ändert den Besitzer und/oder die Gruppe einer Datei.",
+          "long": "Ändert, welcher Benutzer (und optional welche Gruppe) eine Datei besitzt. Nur root kann den Besitz an einen anderen Benutzer übertragen. Mit -R kannst du den Besitz rekursiv in einem Verzeichnisbaum ändern."
+        }
+      },
+      "flags": [
+        { "flag": "-R", "en": "Change ownership recursively.", "de": "Ändert den Besitz rekursiv." },
+        { "flag": "-v", "en": "Verbose: show each change.", "de": "Ausführlich: zeigt jede Änderung." }
+      ],
+      "examples": [
+        { "cmd": "chown alice file.txt", "en": "Give ownership of file.txt to user alice.", "de": "Gibt den Besitz von file.txt an Benutzer alice." },
+        { "cmd": "chown alice:developers project/", "en": "Set owner to alice and group to developers.", "de": "Setzt Besitzer auf alice und Gruppe auf developers." },
+        { "cmd": "chown -R www-data /var/www/html", "en": "Give the web server user ownership of the web root.", "de": "Gibt dem Web-Server-Benutzer den Besitz des Web-Root-Verzeichnisses." }
+      ],
+      "pitfalls": [
+        {
+          "en": "Running 'chown -R root:root /' as root would change ownership of every file on the system. Always double-check the target path.",
+          "de": "Das Ausführen von 'chown -R root:root /' als root würde den Besitz jeder Datei auf dem System ändern. Überprüfe den Zielpfad immer genau."
+        }
+      ],
+      "accepted": ["chown"]
+    },
+    {
+      "id": "ln",
+      "difficulty": "INTERMEDIATE",
+      "distros": ["ALL"],
+      "command": "ln",
+      "syntax": "ln [OPTION]... TARGET LINK_NAME",
+      "explain": {
+        "en": {
+          "short": "Create hard or symbolic links.",
+          "long": "Creates a link pointing to a target file. A symbolic link (-s) is like a shortcut that points to a path. A hard link is an additional directory entry for the same file data."
+        },
+        "de": {
+          "short": "Erstellt Hard- oder Symbolic-Links.",
+          "long": "Erstellt einen Link, der auf eine Zieldatei zeigt. Ein symbolischer Link (-s) ist wie eine Verknüpfung, die auf einen Pfad zeigt. Ein Hardlink ist ein weiterer Verzeichniseintrag für dieselben Dateidaten."
+        }
+      },
+      "flags": [
+        { "flag": "-s", "en": "Create a symbolic (soft) link.", "de": "Erstellt einen symbolischen (weichen) Link." },
+        { "flag": "-f", "en": "Remove existing destination files.", "de": "Entfernt bestehende Zieldateien." }
+      ],
+      "examples": [
+        { "cmd": "ln -s /usr/bin/python3 ~/bin/python", "en": "Create a shortcut for python3 in ~/bin.", "de": "Erstellt eine Verknüpfung für python3 in ~/bin." },
+        { "cmd": "ln original.txt hardlink.txt", "en": "Create a hard link to original.txt.", "de": "Erstellt einen Hardlink zu original.txt." }
+      ],
+      "pitfalls": [
+        {
+          "en": "Symbolic links break if the target is moved or deleted. Hard links share the same data until all links are removed.",
+          "de": "Symbolische Links brechen, wenn das Ziel verschoben oder gelöscht wird. Hardlinks teilen die gleichen Daten, bis alle Links entfernt wurden."
+        }
+      ],
+      "accepted": ["ln"]
+    },
+    {
+      "id": "top",
+      "difficulty": "INTERMEDIATE",
+      "distros": ["ALL"],
+      "command": "top",
+      "syntax": "top [OPTION]",
+      "explain": {
+        "en": {
+          "short": "Show a real-time view of running processes.",
+          "long": "Displays an interactive, continuously updated list of processes with CPU and memory usage. Press 'q' to quit, 'k' to kill a process by PID, 'P' to sort by CPU, and 'M' to sort by memory."
+        },
+        "de": {
+          "short": "Zeigt eine Echtzeitansicht laufender Prozesse.",
+          "long": "Zeigt eine interaktive, kontinuierlich aktualisierte Liste von Prozessen mit CPU- und Speichernutzung. Drücke 'q' zum Beenden, 'k' zum Beenden eines Prozesses per PID, 'P' zum Sortieren nach CPU und 'M' nach Arbeitsspeicher."
+        }
+      },
+      "flags": [
+        { "flag": "-d N", "en": "Set the update interval to N seconds.", "de": "Setzt das Aktualisierungsintervall auf N Sekunden." },
+        { "flag": "-u USER", "en": "Show only processes owned by USER.", "de": "Zeigt nur Prozesse des Benutzers USER." },
+        { "flag": "-n N", "en": "Quit after N iterations (useful for scripts).", "de": "Beendet nach N Iterationen (nützlich für Skripte)." }
+      ],
+      "examples": [
+        { "cmd": "top", "en": "Open the interactive process monitor.", "de": "Öffnet den interaktiven Prozess-Monitor." },
+        { "cmd": "top -u alice", "en": "Show only processes belonging to alice.", "de": "Zeigt nur Prozesse von Benutzer alice." },
+        { "cmd": "top -n 1 -b | head -20", "en": "Snapshot of the top 20 processes (batch mode).", "de": "Momentaufnahme der 20 wichtigsten Prozesse (Batch-Modus)." }
+      ],
+      "pitfalls": [],
+      "accepted": ["top"]
+    },
+    {
+      "id": "ps",
+      "difficulty": "ADVANCED",
+      "distros": ["ALL"],
+      "command": "ps",
+      "syntax": "ps [OPTION]",
+      "explain": {
+        "en": {
+          "short": "Show a snapshot of current running processes.",
+          "long": "Reports a one-time snapshot of active processes. Unlike top, it does not update automatically. The most common usage is 'ps aux' to see all processes with details."
+        },
+        "de": {
+          "short": "Zeigt eine Momentaufnahme der laufenden Prozesse.",
+          "long": "Gibt eine einmalige Momentaufnahme der aktiven Prozesse aus. Anders als top aktualisiert es sich nicht automatisch. Die häufigste Verwendung ist 'ps aux', um alle Prozesse mit Details zu sehen."
+        }
+      },
+      "flags": [
+        { "flag": "aux", "en": "Show all processes for all users with detailed info (BSD syntax).", "de": "Zeigt alle Prozesse aller Benutzer mit Details (BSD-Syntax)." },
+        { "flag": "-ef", "en": "Show all processes in full format (UNIX syntax).", "de": "Zeigt alle Prozesse im vollen Format (UNIX-Syntax)." },
+        { "flag": "--forest", "en": "Show process tree.", "de": "Zeigt den Prozessbaum." }
+      ],
+      "examples": [
+        { "cmd": "ps aux", "en": "List all processes with user, PID, CPU, and memory.", "de": "Listet alle Prozesse mit Benutzer, PID, CPU und Speicher." },
+        { "cmd": "ps aux | grep nginx", "en": "Check whether nginx is running.", "de": "Prüft, ob nginx läuft." },
+        { "cmd": "ps -ef --forest", "en": "Show all processes in a tree view.", "de": "Zeigt alle Prozesse in einer Baumansicht." }
+      ],
+      "pitfalls": [],
+      "accepted": ["ps"]
+    },
+    {
+      "id": "kill",
+      "difficulty": "ADVANCED",
+      "distros": ["ALL"],
+      "command": "kill",
+      "syntax": "kill [SIGNAL] PID",
+      "explain": {
+        "en": {
+          "short": "Send a signal to a process (usually to stop it).",
+          "long": "By default sends SIGTERM (15) to a process, asking it to terminate gracefully. If a process ignores SIGTERM, use SIGKILL (9) to force kill it. Get the PID from ps or pidof."
+        },
+        "de": {
+          "short": "Sendet ein Signal an einen Prozess (meistens zum Beenden).",
+          "long": "Sendet standardmäßig SIGTERM (15) an einen Prozess und fordert ihn auf, sich ordentlich zu beenden. Wenn ein Prozess SIGTERM ignoriert, verwende SIGKILL (9), um ihn zu erzwingen. Die PID erhältst du von ps oder pidof."
+        }
+      },
+      "flags": [
+        { "flag": "-9", "en": "Force kill the process (SIGKILL, cannot be caught).", "de": "Erzwingt das Beenden des Prozesses (SIGKILL, kann nicht abgefangen werden)." },
+        { "flag": "-15", "en": "Send SIGTERM (graceful termination, default).", "de": "Sendet SIGTERM (ordentliches Beenden, Standard)." },
+        { "flag": "-l", "en": "List all available signal names.", "de": "Listet alle verfügbaren Signalnamen auf." }
+      ],
+      "examples": [
+        { "cmd": "kill 1234", "en": "Gracefully terminate process with PID 1234.", "de": "Beendet Prozess mit PID 1234 ordentlich." },
+        { "cmd": "kill -9 1234", "en": "Force kill process with PID 1234.", "de": "Erzwingt das Beenden von Prozess 1234." },
+        { "cmd": "kill -l", "en": "List all signal types.", "de": "Listet alle Signaltypen auf." }
+      ],
+      "pitfalls": [
+        {
+          "en": "Avoid kill -9 as a first resort. Give the process a chance to clean up with regular kill first.",
+          "de": "Vermeide kill -9 als erste Maßnahme. Gib dem Prozess zuerst die Chance, sich mit einem normalen kill zu beenden."
+        }
+      ],
+      "accepted": ["kill"]
+    },
+    {
+      "id": "df",
+      "difficulty": "ADVANCED",
+      "distros": ["ALL"],
+      "command": "df",
+      "syntax": "df [OPTION]... [FILE]...",
+      "explain": {
+        "en": {
+          "short": "Show disk space usage of mounted filesystems.",
+          "long": "Reports the amount of disk space used and available on all mounted filesystems. Use -h for human-readable sizes. Pass a path to see the filesystem info for that specific location."
+        },
+        "de": {
+          "short": "Zeigt den Speicherplatz der eingehängten Dateisysteme.",
+          "long": "Gibt den belegten und verfügbaren Speicherplatz auf allen eingehängten Dateisystemen aus. Verwende -h für menschenlesbare Größen. Gib einen Pfad an, um die Dateisysteminfo für diesen Ort zu sehen."
+        }
+      },
+      "flags": [
+        { "flag": "-h", "en": "Human-readable sizes (KB, MB, GB).", "de": "Menschenlesbare Größen (KB, MB, GB)." },
+        { "flag": "-T", "en": "Show filesystem type.", "de": "Zeigt den Dateisystemtyp an." },
+        { "flag": "-i", "en": "Show inode usage instead of block usage.", "de": "Zeigt Inode-Nutzung statt Block-Nutzung." }
+      ],
+      "examples": [
+        { "cmd": "df -h", "en": "Show disk usage in human-readable format.", "de": "Zeigt die Festplattennutzung in menschenlesbarem Format." },
+        { "cmd": "df -hT", "en": "Show disk usage with filesystem type.", "de": "Zeigt die Festplattennutzung mit Dateisystemtyp." },
+        { "cmd": "df -h /home", "en": "Show info only for the filesystem containing /home.", "de": "Zeigt Info nur für das Dateisystem, das /home enthält." }
+      ],
+      "pitfalls": [],
+      "accepted": ["df"]
+    },
+    {
+      "id": "du",
+      "difficulty": "ADVANCED",
+      "distros": ["ALL"],
+      "command": "du",
+      "syntax": "du [OPTION]... [FILE]...",
+      "explain": {
+        "en": {
+          "short": "Show disk usage of files and directories.",
+          "long": "Estimates and reports the disk space used by files and directories. Unlike df which shows filesystem-level data, du drills down into individual directories and files."
+        },
+        "de": {
+          "short": "Zeigt den Speicherplatzbedarf von Dateien und Verzeichnissen.",
+          "long": "Schätzt und gibt den Speicherplatzbedarf von Dateien und Verzeichnissen aus. Anders als df, das Dateisystem-Ebenen zeigt, geht du in einzelne Verzeichnisse und Dateien hinein."
+        }
+      },
+      "flags": [
+        { "flag": "-h", "en": "Human-readable sizes.", "de": "Menschenlesbare Größen." },
+        { "flag": "-s", "en": "Display only a total for each argument (summary).", "de": "Zeigt nur eine Gesamtsumme für jedes Argument (Zusammenfassung)." },
+        { "flag": "--max-depth=N", "en": "Limit output to N levels deep.", "de": "Begrenzt die Ausgabe auf N Ebenen." }
+      ],
+      "examples": [
+        { "cmd": "du -sh folder/", "en": "Show the total size of folder/.", "de": "Zeigt die Gesamtgröße von folder/." },
+        { "cmd": "du -h --max-depth=1 /var", "en": "Show sizes of subdirectories in /var one level deep.", "de": "Zeigt Größen der Unterverzeichnisse in /var eine Ebene tief." },
+        { "cmd": "du -sh * | sort -rh | head -10", "en": "Find the 10 largest items in the current directory.", "de": "Findet die 10 größten Elemente im aktuellen Verzeichnis." }
+      ],
+      "pitfalls": [],
+      "accepted": ["du"]
+    },
+    {
+      "id": "uname",
+      "difficulty": "ADVANCED",
+      "distros": ["ALL"],
+      "command": "uname",
+      "syntax": "uname [OPTION]",
+      "explain": {
+        "en": {
+          "short": "Print system information.",
+          "long": "Displays information about the operating system kernel, hostname, hardware architecture, and more. Commonly used in scripts to check the environment before running platform-specific commands."
+        },
+        "de": {
+          "short": "Gibt Systeminformationen aus.",
+          "long": "Zeigt Informationen über den Betriebssystem-Kernel, Hostnamen, Hardware-Architektur und mehr. Wird häufig in Skripten verwendet, um die Umgebung zu prüfen, bevor plattformspezifische Befehle ausgeführt werden."
+        }
+      },
+      "flags": [
+        { "flag": "-a", "en": "Print all system information.", "de": "Gibt alle Systeminformationen aus." },
+        { "flag": "-r", "en": "Print the kernel release version.", "de": "Gibt die Kernel-Release-Version aus." },
+        { "flag": "-m", "en": "Print the machine hardware name (architecture).", "de": "Gibt den Hardware-Maschinennamen (Architektur) aus." }
+      ],
+      "examples": [
+        { "cmd": "uname -a", "en": "Show all available system information.", "de": "Zeigt alle verfügbaren Systeminformationen." },
+        { "cmd": "uname -r", "en": "Show the kernel version.", "de": "Zeigt die Kernel-Version." }
+      ],
+      "pitfalls": [],
+      "accepted": ["uname"]
+    },
+    {
+      "id": "hostname",
+      "difficulty": "ADVANCED",
+      "distros": ["ALL"],
+      "command": "hostname",
+      "syntax": "hostname [OPTION] [NAME]",
+      "explain": {
+        "en": {
+          "short": "Show or set the system's hostname.",
+          "long": "Prints the hostname of the machine. To temporarily change the hostname, pass the new name as an argument (requires root). For a permanent change, edit /etc/hostname."
+        },
+        "de": {
+          "short": "Zeigt oder setzt den Hostnamen des Systems.",
+          "long": "Gibt den Hostnamen des Rechners aus. Um den Hostnamen vorübergehend zu ändern, gib den neuen Namen als Argument an (erfordert root). Für eine dauerhafte Änderung bearbeite /etc/hostname."
+        }
+      },
+      "flags": [
+        { "flag": "-I", "en": "Display all IP addresses of the host.", "de": "Zeigt alle IP-Adressen des Hosts." },
+        { "flag": "-f", "en": "Show the fully qualified domain name (FQDN).", "de": "Zeigt den vollqualifizierten Domänennamen (FQDN)." }
+      ],
+      "examples": [
+        { "cmd": "hostname", "en": "Show the current hostname.", "de": "Zeigt den aktuellen Hostnamen." },
+        { "cmd": "hostname -I", "en": "Show all IP addresses of this machine.", "de": "Zeigt alle IP-Adressen dieser Maschine." }
+      ],
+      "pitfalls": [],
+      "accepted": ["hostname"]
+    },
+    {
+      "id": "ip",
+      "difficulty": "ADVANCED",
+      "distros": ["ALL"],
+      "command": "ip",
+      "syntax": "ip [OPTION] OBJECT [COMMAND]",
+      "explain": {
+        "en": {
+          "short": "Show and manage network interfaces and routing.",
+          "long": "The modern replacement for ifconfig and route. Use 'ip a' to see all network interfaces and their IP addresses, 'ip r' to see the routing table, and 'ip link' to manage interfaces."
+        },
+        "de": {
+          "short": "Zeigt und verwaltet Netzwerkinterfaces und Routing.",
+          "long": "Der moderne Ersatz für ifconfig und route. Verwende 'ip a', um alle Netzwerkinterfaces und ihre IP-Adressen zu sehen, 'ip r' für die Routing-Tabelle und 'ip link' zur Verwaltung von Interfaces."
+        }
+      },
+      "flags": [
+        { "flag": "a", "en": "Show all network interfaces and their addresses.", "de": "Zeigt alle Netzwerkinterfaces und deren Adressen." },
+        { "flag": "r", "en": "Show the routing table.", "de": "Zeigt die Routing-Tabelle." },
+        { "flag": "link", "en": "Manage network interfaces (bring up/down, etc.).", "de": "Verwaltet Netzwerkinterfaces (hoch-/runterfahren usw.)." }
+      ],
+      "examples": [
+        { "cmd": "ip a", "en": "Show all network interfaces and IP addresses.", "de": "Zeigt alle Netzwerkinterfaces und IP-Adressen." },
+        { "cmd": "ip r", "en": "Show the current routing table.", "de": "Zeigt die aktuelle Routing-Tabelle." },
+        { "cmd": "ip link show eth0", "en": "Show details of the eth0 interface.", "de": "Zeigt Details des eth0-Interfaces." }
+      ],
+      "pitfalls": [],
+      "accepted": ["ip", "ip a", "ip r"]
+    },
+    {
+      "id": "ss",
+      "difficulty": "ADVANCED",
+      "distros": ["ALL"],
+      "command": "ss",
+      "syntax": "ss [OPTION]",
+      "explain": {
+        "en": {
+          "short": "Investigate network sockets and connections.",
+          "long": "The modern replacement for netstat. Shows active network connections and listening ports. Use -tulwn to see all listening TCP and UDP ports without DNS resolution."
+        },
+        "de": {
+          "short": "Untersucht Netzwerk-Sockets und Verbindungen.",
+          "long": "Der moderne Ersatz für netstat. Zeigt aktive Netzwerkverbindungen und lauschende Ports. Verwende -tulwn, um alle lauschenden TCP- und UDP-Ports ohne DNS-Auflösung zu sehen."
+        }
+      },
+      "flags": [
+        { "flag": "-t", "en": "Show TCP connections.", "de": "Zeigt TCP-Verbindungen." },
+        { "flag": "-u", "en": "Show UDP connections.", "de": "Zeigt UDP-Verbindungen." },
+        { "flag": "-l", "en": "Show only listening sockets.", "de": "Zeigt nur lauschende Sockets." },
+        { "flag": "-n", "en": "Do not resolve hostnames or port names.", "de": "Hostnamen und Portnamen nicht auflösen." },
+        { "flag": "-p", "en": "Show the process using each socket.", "de": "Zeigt den Prozess, der jeden Socket verwendet." }
+      ],
+      "examples": [
+        { "cmd": "ss -tulwn", "en": "Show all listening TCP and UDP ports.", "de": "Zeigt alle lauschenden TCP- und UDP-Ports." },
+        { "cmd": "ss -tnp", "en": "Show active TCP connections with process names.", "de": "Zeigt aktive TCP-Verbindungen mit Prozessnamen." }
+      ],
+      "pitfalls": [],
+      "accepted": ["ss"]
+    },
+    {
+      "id": "curl",
+      "difficulty": "ADVANCED",
+      "distros": ["ALL"],
+      "command": "curl",
+      "syntax": "curl [OPTION]... URL",
+      "explain": {
+        "en": {
+          "short": "Transfer data to or from a server using URLs.",
+          "long": "Downloads content from a URL or sends data to a server. Supports HTTP, HTTPS, FTP, and many other protocols. Essential for testing APIs, downloading files, and scripting HTTP requests."
+        },
+        "de": {
+          "short": "Überträgt Daten zu oder von einem Server über URLs.",
+          "long": "Lädt Inhalte von einer URL herunter oder sendet Daten an einen Server. Unterstützt HTTP, HTTPS, FTP und viele andere Protokolle. Unverzichtbar für API-Tests, das Herunterladen von Dateien und das Skripten von HTTP-Anfragen."
+        }
+      },
+      "flags": [
+        { "flag": "-o FILE", "en": "Save output to FILE.", "de": "Speichert die Ausgabe in FILE." },
+        { "flag": "-O", "en": "Save output using the remote filename.", "de": "Speichert die Ausgabe unter dem Remote-Dateinamen." },
+        { "flag": "-L", "en": "Follow redirects.", "de": "Folgt Weiterleitungen." },
+        { "flag": "-s", "en": "Silent mode (no progress bar).", "de": "Stiller Modus (kein Fortschrittsbalken)." },
+        { "flag": "-X METHOD", "en": "Specify HTTP request method (GET, POST, etc.).", "de": "Gibt die HTTP-Anfragemethode an (GET, POST usw.)." }
+      ],
+      "examples": [
+        { "cmd": "curl https://example.com", "en": "Fetch and print the HTML of example.com.", "de": "Lädt den HTML-Inhalt von example.com herunter und gibt ihn aus." },
+        { "cmd": "curl -O https://example.com/file.zip", "en": "Download file.zip from the server.", "de": "Lädt file.zip vom Server herunter." },
+        { "cmd": "curl -s https://api.example.com/data | less", "en": "Fetch API data and browse it with less.", "de": "Ruft API-Daten ab und durchsucht sie mit less." }
+      ],
+      "pitfalls": [],
+      "accepted": ["curl"]
+    },
+    {
+      "id": "systemctl",
+      "difficulty": "ADVANCED",
+      "distros": ["ALL"],
+      "command": "systemctl",
+      "syntax": "systemctl [COMMAND] [UNIT]",
+      "explain": {
+        "en": {
+          "short": "Control the systemd system and service manager.",
+          "long": "Manages services (daemons) on systemd-based Linux systems. Can start, stop, restart, enable (auto-start on boot), disable, and check the status of services."
+        },
+        "de": {
+          "short": "Steuert den systemd System- und Service-Manager.",
+          "long": "Verwaltet Dienste (Daemons) auf systemd-basierten Linux-Systemen. Kann Dienste starten, stoppen, neu starten, aktivieren (Autostart beim Booten), deaktivieren und deren Status prüfen."
+        }
+      },
+      "flags": [
+        { "flag": "start", "en": "Start a service.", "de": "Startet einen Dienst." },
+        { "flag": "stop", "en": "Stop a service.", "de": "Stoppt einen Dienst." },
+        { "flag": "restart", "en": "Restart a service.", "de": "Startet einen Dienst neu." },
+        { "flag": "status", "en": "Show the status of a service.", "de": "Zeigt den Status eines Dienstes." },
+        { "flag": "enable", "en": "Enable a service to start at boot.", "de": "Aktiviert einen Dienst für den Autostart beim Booten." },
+        { "flag": "disable", "en": "Disable a service from starting at boot.", "de": "Deaktiviert den Autostart eines Dienstes beim Booten." }
+      ],
+      "examples": [
+        { "cmd": "systemctl status ssh", "en": "Check the status of the SSH service.", "de": "Prüft den Status des SSH-Dienstes." },
+        { "cmd": "systemctl restart nginx", "en": "Restart the nginx web server.", "de": "Startet den nginx-Webserver neu." },
+        { "cmd": "systemctl enable docker", "en": "Enable Docker to start automatically on boot.", "de": "Aktiviert Docker für den automatischen Start beim Booten." }
+      ],
+      "pitfalls": [],
+      "accepted": ["systemctl"]
+    }
+  ]
+}
