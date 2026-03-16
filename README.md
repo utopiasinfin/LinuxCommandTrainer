@@ -8,6 +8,7 @@ Developed as part of a training project during education as a system integrator 
 - **Language selection** at startup: English, Deutsch, or Both (EN+DE) — no default, must choose explicitly
 - **Distro selection**: Debian/Ubuntu, Arch/Manjaro, Fedora
 - **Three difficulty levels**: Beginner, Intermediate, Advanced
+- **Quick back navigation**: type `q` or press Esc and then ENTER to go back one menu level; from the language screen this exits the program
 - **~40 core universal commands** loaded from an offline JSON data file, each with:
   - Bilingual short and long explanations (English + German, informal "du")
   - Syntax string
@@ -30,7 +31,15 @@ Developed as part of a training project during education as a system integrator 
 
        ./run.sh
 
-3. Optional: set up a global alias
+   `run.sh` checks whether the compiled files in `bin/` are missing or outdated and automatically runs `./compile.sh` when needed.
+
+3. While using the trainer:
+
+       q
+
+   or press Esc and then ENTER to go back to the previous menu. On the first language screen, this exits the trainer.
+
+4. Optional: set up a global alias
 
        alias linuxtrainer='cd /path/to/LinuxCommandTrainer && ./run.sh'
 

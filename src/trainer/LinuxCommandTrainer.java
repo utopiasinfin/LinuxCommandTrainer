@@ -7,6 +7,10 @@ import java.util.Scanner;
 
 public class LinuxCommandTrainer {
 
+    static class InputClosedException extends RuntimeException {
+        private static final long serialVersionUID = 1L;
+    }
+
     // --- ANSI color codes ---
     static final String RESET  = "\u001B[0m";
     static final String BLUE   = "\u001B[34m";
@@ -41,7 +45,35 @@ public class LinuxCommandTrainer {
             System.out.print(CYAN + "  [Press ENTER to continue...]" + RESET);
             firstPause = false;
         }
-        scanner.nextLine();
+        readLine();
+    }
+
+    static String readLine() {
+        if (!scanner.hasNextLine()) {
+            throw new InputClosedException();
+        }
+        return scanner.nextLine();
+    }
+
+    static boolean isBackInput(String input) {
+        String trimmed = input.trim();
+        return trimmed.equalsIgnoreCase("q") || trimmed.equals("\u001B");
+    }
+
+    static void printBackHint(String text) {
+        System.out.println(CYAN + "  " + text + RESET);
+    }
+
+    static boolean waitForEnterOrBack(String prompt) {
+        System.out.print(CYAN + prompt + RESET);
+        return isBackInput(readLine());
+    }
+
+    static void exitProgram() {
+        System.out.print(CYAN);
+        printSlow("\n  Thanks for learning Linux! Keep exploring!", 15);
+        System.out.println(RESET);
+        scanner.close();
     }
 
     static void clearConsole() {
@@ -92,16 +124,18 @@ public class LinuxCommandTrainer {
         System.out.println("  [1] English");
         System.out.println("  [2] Deutsch");
         System.out.println("  [3] Both / Beide (EN + DE)");
+        printBackHint("Type q or press Esc, then ENTER, to exit.");
         System.out.println();
         while (true) {
             System.out.print("  Enter 1, 2, or 3: ");
-            String choice = scanner.nextLine().trim();
+                String choice = readLine().trim();
+            if (isBackInput(choice)) return null;
             switch (choice) {
                 case "1": return Language.ENGLISH;
                 case "2": return Language.GERMAN;
                 case "3": return Language.BOTH;
                 default:
-                    System.out.println(RED + "  Invalid input. Please enter 1, 2, or 3." + RESET);
+                    System.out.println(RED + "  Invalid input. Please enter 1, 2, or 3, or q to exit." + RESET);
             }
         }
     }
@@ -118,16 +152,18 @@ public class LinuxCommandTrainer {
         System.out.println("  [1] Debian / Ubuntu");
         System.out.println("  [2] Arch / Manjaro");
         System.out.println("  [3] Fedora");
+        printBackHint("Type q or press Esc, then ENTER, to go back.");
         System.out.println();
         while (true) {
             System.out.print("  Enter 1, 2, or 3: ");
-            String choice = scanner.nextLine().trim();
+                String choice = readLine().trim();
+            if (isBackInput(choice)) return null;
             switch (choice) {
                 case "1": return "Debian/Ubuntu";
                 case "2": return "Arch/Manjaro";
                 case "3": return "Fedora";
                 default:
-                    System.out.println(RED + "  Invalid input. Please enter 1, 2, or 3." + RESET);
+                    System.out.println(RED + "  Invalid input. Please enter 1, 2, or 3, or q to go back." + RESET);
             }
         }
     }
@@ -144,16 +180,18 @@ public class LinuxCommandTrainer {
         System.out.println("  [1] Beginner     -- Core navigation and file management");
         System.out.println("  [2] Intermediate -- Text processing, archives, and permissions");
         System.out.println("  [3] Advanced     -- Processes, networking, and system management");
+        printBackHint("Type q or press Esc, then ENTER, to go back.");
         System.out.println();
         while (true) {
             System.out.print("  Enter 1, 2, or 3: ");
-            String choice = scanner.nextLine().trim();
+                String choice = readLine().trim();
+            if (isBackInput(choice)) return null;
             switch (choice) {
                 case "1": return Difficulty.BEGINNER;
                 case "2": return Difficulty.INTERMEDIATE;
                 case "3": return Difficulty.ADVANCED;
                 default:
-                    System.out.println(RED + "  Invalid input. Please enter 1, 2, or 3." + RESET);
+                    System.out.println(RED + "  Invalid input. Please enter 1, 2, or 3, or q to go back." + RESET);
             }
         }
     }
@@ -162,7 +200,7 @@ public class LinuxCommandTrainer {
     // Mode menu
     // -------------------------------------------------------------------------
 
-    static int chooseModeMenu(Language lang, Difficulty level) {
+    static Integer chooseModeMenu(Language lang, Difficulty level) {
         System.out.println();
         hr(CYAN);
         String langLabel = lang == Language.ENGLISH ? "English" :
@@ -175,10 +213,12 @@ public class LinuxCommandTrainer {
         System.out.println("  [4] Flags quiz  (multiple choice)");
         System.out.println("  [5] Change language / distro / level");
         System.out.println("  [6] Exit");
+        printBackHint("Type q or press Esc, then ENTER, to go back to difficulty selection.");
         System.out.println();
         while (true) {
             System.out.print("  Your choice: ");
-            String choice = scanner.nextLine().trim();
+                String choice = readLine().trim();
+            if (isBackInput(choice)) return null;
             switch (choice) {
                 case "1": return 1;
                 case "2": return 2;
@@ -187,7 +227,7 @@ public class LinuxCommandTrainer {
                 case "5": return 5;
                 case "6": return 6;
                 default:
-                    System.out.println(RED + "  Invalid choice. Enter 1-6." + RESET);
+                    System.out.println(RED + "  Invalid choice. Enter 1-6, or q to go back." + RESET);
             }
         }
     }
@@ -228,8 +268,7 @@ public class LinuxCommandTrainer {
             }
         }
         System.out.println();
-        System.out.print("  " + CYAN + "[Press ENTER to return to the menu...]" + RESET);
-        scanner.nextLine();
+        waitForEnterOrBack("  [Press ENTER, q, or Esc+ENTER to return to the menu...]");
     }
 
     // -------------------------------------------------------------------------
@@ -240,7 +279,11 @@ public class LinuxCommandTrainer {
         clearConsole();
         System.out.println(GREEN + BOLD + "\n  -- Learn Mode --" + RESET);
         System.out.println(YELLOW + "  Go through each command with full details.\n" + RESET);
-        pause();
+        printBackHint("Press q or Esc+ENTER during a pause to return to the menu.");
+        if (waitForEnterOrBack("  [Press ENTER to begin, q or Esc+ENTER to return to the menu... ]")) {
+            System.out.println(CYAN + "\n  Returning to the menu..." + RESET);
+            return;
+        }
 
         int idx = 1;
         for (LinuxCommand cmd : commands) {
@@ -299,7 +342,10 @@ public class LinuxCommandTrainer {
 
             System.out.println();
             hr(BLUE);
-            pause();
+            if (waitForEnterOrBack("  [Press ENTER for the next command, q or Esc+ENTER to return to the menu... ]")) {
+                System.out.println(CYAN + "\n  Returning to the menu..." + RESET);
+                return;
+            }
             idx++;
         }
 
@@ -319,6 +365,7 @@ public class LinuxCommandTrainer {
 
         System.out.println(PURPLE + BOLD + "\n  -- Command Quiz --" + RESET);
         System.out.println(YELLOW + "  Read the description and type the command.\n" + RESET);
+        printBackHint("Type q or press Esc, then ENTER, to return to the menu.");
 
         for (int i = 0; i < shuffled.size(); i++) {
             LinuxCommand cmd = shuffled.get(i);
@@ -333,7 +380,11 @@ public class LinuxCommandTrainer {
             }
 
             System.out.print(YELLOW + "  Command: " + RESET);
-            String input = scanner.nextLine();
+                String input = readLine();
+            if (isBackInput(input)) {
+                System.out.println(CYAN + "\n  Returning to the menu..." + RESET);
+                return;
+            }
 
             if (cmd.matches(input)) {
                 System.out.println(GREEN + "  Correct!" + RESET);
@@ -387,6 +438,7 @@ public class LinuxCommandTrainer {
 
         System.out.println(PURPLE + BOLD + "\n  -- Flags Quiz (Multiple Choice) --" + RESET);
         System.out.println(YELLOW + "  Choose the correct meaning of each flag.\n" + RESET);
+        printBackHint("Type q or press Esc, then ENTER, to return to the menu.");
 
         for (int q = 0; q < total; q++) {
             int idx = indices.get(q);
@@ -436,7 +488,11 @@ public class LinuxCommandTrainer {
             int userChoice = -1;
             while (userChoice < 1 || userChoice > options.size()) {
                 System.out.print("  Your answer (1-" + options.size() + "): ");
-                String input = scanner.nextLine().trim();
+                String input = readLine().trim();
+                if (isBackInput(input)) {
+                    System.out.println(CYAN + "\n  Returning to the menu..." + RESET);
+                    return;
+                }
                 try {
                     userChoice = Integer.parseInt(input);
                     if (userChoice < 1 || userChoice > options.size()) {
@@ -471,41 +527,67 @@ public class LinuxCommandTrainer {
     // -------------------------------------------------------------------------
 
     public static void main(String[] args) {
-        intro();
+        try {
+            intro();
 
-        while (true) {
-            Language lang = chooseLanguage();
-            String distro = chooseDistro();
-            Difficulty level = chooseLevel();
+            while (true) {
+                Language lang = chooseLanguage();
+                if (lang == null) {
+                    exitProgram();
+                    return;
+                }
 
-            List<LinuxCommand> commands = LinuxCommandsDatabase.getCommandsForDistro(distro, level);
+                boolean restartSetup = false;
+                while (!restartSetup) {
+                    String distro = chooseDistro();
+                    if (distro == null) break;
 
-            if (commands.isEmpty()) {
-                System.out.println(RED + "\n  No commands found for this selection. Returning to setup.\n" + RESET);
-                continue;
-            }
+                    while (true) {
+                        Difficulty level = chooseLevel();
+                        if (level == null) break;
 
-            System.out.println(GREEN + "\n  Loaded " + commands.size() + " commands." + RESET);
+                        List<LinuxCommand> commands = LinuxCommandsDatabase.getCommandsForDistro(distro, level);
 
-            boolean running = true;
-            while (running) {
-                int mode = chooseModeMenu(lang, level);
-                switch (mode) {
-                    case 1: showCommands(commands, lang);   break;
-                    case 2: learnMode(commands, lang);      break;
-                    case 3: commandQuiz(commands, lang);    break;
-                    case 4: flagsQuiz(commands, lang);      break;
-                    case 5: running = false;                break;
-                    case 6:
-                        System.out.print(CYAN);
-                        printSlow("\n  Thanks for learning Linux! Keep exploring!", 15);
-                        System.out.println(RESET);
-                        scanner.close();
-                        return;
-                    default:
-                        break;
+                        if (commands.isEmpty()) {
+                            System.out.println(RED + "\n  No commands found for this selection. Returning to difficulty selection.\n" + RESET);
+                            continue;
+                        }
+
+                        System.out.println(GREEN + "\n  Loaded " + commands.size() + " commands." + RESET);
+
+                        boolean chooseAnotherLevel = false;
+                        while (!chooseAnotherLevel) {
+                            Integer mode = chooseModeMenu(lang, level);
+                            if (mode == null) {
+                                chooseAnotherLevel = true;
+                                break;
+                            }
+
+                            switch (mode) {
+                                case 1: showCommands(commands, lang); break;
+                                case 2: learnMode(commands, lang);    break;
+                                case 3: commandQuiz(commands, lang);  break;
+                                case 4: flagsQuiz(commands, lang);    break;
+                                case 5:
+                                    restartSetup = true;
+                                    chooseAnotherLevel = true;
+                                    break;
+                                case 6:
+                                    exitProgram();
+                                    return;
+                                default:
+                                    break;
+                            }
+                        }
+
+                        if (restartSetup) {
+                            break;
+                        }
+                    }
                 }
             }
+        } catch (InputClosedException e) {
+            exitProgram();
         }
     }
 }
